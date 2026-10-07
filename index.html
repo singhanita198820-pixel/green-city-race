@@ -79,6 +79,33 @@ footer{padding:40px 5%;display:flex;justify-content:space-between;flex-wrap:wrap
   <div><b style="color:#fff">GREEN CITY RACE</b> © 2026 | Kolkata, India</div>
   <div>Instagram: @greencityrace • Contact: +91 99999 99999</div>
 </footer>
+<div class="cta" id="claim-section" style="margin-top:30px; background:#e8f5e9; padding:20px; border-radius:12px;">
+  <h2>CLAIM YOUR POINTS 🌱</h2>
+  <p>Game khelo aur points claim karo</p>
+  <input id="walletInput" placeholder="Wallet address dalo" style="padding:10px; width:80%; max-width:300px; border-radius:8px; border:1px solid #ccc;">
+  <br><br>
+  <button onclick="claimPoints()" style="padding:12px 25px; background:#2e7d32; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Claim Now</button>
+  <p id="claimStatus" style="margin-top:10px; font-weight:600;"></p>
+</div>
 
+<script>
+const CLAIM_URL = "https://script.google.com/macros/s/AKfycbwQw9hn9MaCKsySsfWHBTw68CFw7Bb_sxrhTC3_38QEXU2MpWkrGV-MynkB2Sh2plY0ow/exec";
+
+function claimPoints() {
+  let wallet = document.getElementById("walletInput").value;
+  if(!wallet){ alert("Pehle wallet dalo"); return; }
+  let points = localStorage.getItem("points") || "100";
+  document.getElementById("claimStatus").innerText = "Claiming...";
+  
+  fetch(CLAIM_URL + "?wallet=" + wallet + "&points=" + points)
+    .then(res => res.text())
+    .then(() => {
+      document.getElementById("claimStatus").innerText = "✅ Claim successful! Sheet me save ho gaya";
+    })
+    .catch(() => {
+      document.getElementById("claimStatus").innerText = "Error, dubara try karo";
+    });
+}
+</script>
 </body>
 </html>
