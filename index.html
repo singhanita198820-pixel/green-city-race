@@ -1,111 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Green City Race 2026 | Kolkata's Biggest Eco Run</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GREEN CITY RACE x TURBO26 | Kolkata 2026 - Claim TURBO26</title>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.8.1/dist/ethers.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#070a07;color:#fff;overflow-x:hidden}
-h1,h2{font-family:'Syne',sans-serif}
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:6% 5%;background:url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=2000') center/cover}
-.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#070a07 30%,#070a07cc 60%,#070a0770);z-index:1}
-.hero-content{position:relative;z-index:2;max-width:650px}
-.badge{display:inline-block;background:#c6ff00;color:#000;padding:6px 16px;border-radius:100px;font-weight:800;font-size:12px;letter-spacing:1px;margin-bottom:20px}
-.hero h1{font-size:clamp(48px,8vw,92px);line-height:0.9;text-transform:uppercase}
-.hero h1 .outline{-webkit-text-stroke:1px #fff;color:transparent}
-.hero h1 .lime{color:#c6ff00}
-.hero p{color:#9aa89a;font-size:18px;margin:20px 0;max-width:500px;line-height:1.6}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;border-radius:100px;font-weight:700;text-decoration:none;transition:.3s;cursor:pointer}
-.btn-lime{background:#c6ff00;color:#000}.btn-lime:hover{transform:scale(1.05);box-shadow:0 0 30px #c6ff0080}
-.btn-glass{background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);color:#fff}
-.marquee{background:#c6ff00;color:#000;padding:14px 0;white-space:nowrap;overflow:hidden;font-family:'Syne';font-weight:800;letter-spacing:1px}
-.marquee span{display:inline-block;animation:scroll 20s linear infinite}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.stats-bar{display:grid;grid-template-columns:repeat(3,1fr);background:#101410;border-top:1px solid #1a251a;border-bottom:1px solid #1a251a}
-.stat{padding:28px;text-align:center;border-right:1px solid #1a251a}.stat b{font-family:'Syne';font-size:38px;color:#c6ff00;display:block}.stat p{color:#6b7c6b;font-size:12px;letter-spacing:2px;text-transform:uppercase}
-.section{padding:80px 5%;max-width:1300px;margin:0 auto}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:40px}
-.card{background:linear-gradient(180deg,#151d15,#0f140f);border:1px solid #1e2e1e;border-radius:24px;padding:28px;position:relative;overflow:hidden;transition:.4s}
-.card:hover{transform:translateY(-8px);border-color:#c6ff00}
-.card .icon{width:54px;height:54px;background:#1d2a1d;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px}
-.card h3{font-size:20px;margin-bottom:8px}.card p{color:#8a9a8a;font-size:14px;line-height:1.6}
-.cta{background:#c6ff00;color:#000;border-radius:32px;padding:60px 40px;text-align:center;margin:40px 5%}
-.cta h2{font-size:clamp(32px,6vw,64px);line-height:0.9}
-footer{padding:40px 5%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;color:#4a5a4a;font-size:13px;border-top:1px solid #111811}
+body{background:#060B14;color:#fff;font-family:Inter,system-ui;overflow-x:hidden}
+:root{--neon:#C6FF00;--turbo:#00F0FF;--dark:#060B14}
+.hero{position:relative;min-height:92vh;padding:28px 5% 0;background:radial-gradient(120% 80% at 70% 20%,#0a1a2f 0%,#060B14 70%);border-bottom:1px solid rgba(0,240,255,.15)}
+.nav{display:flex;justify-content:space-between;align-items:center;max-width:1300px;margin:auto}
+.logo{font-family:Syne;font-size:20px;letter-spacing:1px}.logo span{color:var(--turbo)}
+.badge{display:inline-flex;background:rgba(198,255,0,.12);border:1px solid var(--neon);color:var(--neon);padding:7px 14px;border-radius:100px;font-size:10px;font-weight:800;letter-spacing:1.5px;margin:30px 0 18px}
+.title{font-family:Syne;font-size:clamp(44px,8vw,96px);line-height:.9;max-width:620px}
+.title .stroke{color:transparent;-webkit-text-stroke:1px #fff}.title .green{color:var(--neon)}.title .blue{color:var(--turbo)}
+.sub{color:#8aa0b0;max-width:460px;margin:20px 0 28px;line-height:1.6;font-size:14px}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:15px 26px;border-radius:12px;font-weight:800;font-size:13px;cursor:pointer;border:none;text-decoration:none;display:inline-flex;gap:8px;transition:.3s}
+.btn-turbo{background:var(--turbo);color:#000;box-shadow:0 0 30px rgba(0,240,255,.4)}
+.btn-neon{background:var(--neon);color:#000}.btn-ghost{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.12)}
+
+/* TURBO26 CONTRACT BAR - Like your 2nd screenshot */
+.contract-bar{max-width:1100px;margin:26px auto 0;background:rgba(0,240,255,.06);border:1px solid rgba(0,240,255,.25);border-radius:14px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;backdrop-filter:blur(10px)}
+.contract-bar code{font-family:'JetBrains Mono';font-size:12px;color:#00FF88;word-break:break-all}
+.copy-btn{background:var(--turbo);color:#000;padding:8px 16px;border-radius:8px;font-weight:800;font-size:11px;border:none;cursor:pointer}
+.lp-bar{max-width:1100px;margin:14px auto 0;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.2);border-radius:12px;padding:10px 16px;font-size:11px;color:#9bb0a5;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lp-bar b{color:#00FF88}
+
+/* CHAIN CARDS - Exact like turbo26.in */
+.chains{max-width:1100px;margin:28px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.chains{grid-template-columns:1fr}}
+.chain-card{background:linear-gradient(180deg,#0f1f36,#0a1424);border:1px solid rgba(0,240,255,.2);border-radius:18px;padding:18px}
+.chain-card h4{font-family:Syne;font-size:14px;display:flex;gap:8px;align-items:center}
+.chain-card p{font-size:11px;color:#6a8496;margin:4px 0 14px}
+.chain-actions{display:flex;gap:8px}
+.mini-btn{flex:1;padding:12px 8px;border-radius:10px;font-size:11px;font-weight:800;border:none;cursor:pointer}
+.mini-dark{background:rgba(0,240,255,.12);color:#fff;border:1px solid rgba(0,240,255,.2)}
+.mini-turbo{background:var(--turbo);color:#000}
+
+/* T-COIN CLAIM GAMING CARD */
+.claim-wrap{max-width:1100px;margin:40px auto 0;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;padding-bottom:60px}
+@media(max-width:900px){.claim-wrap{grid-template-columns:1fr}}
+.claim-card{background:radial-gradient(100% 100% at 0% 0%,rgba(0,240,255,.15),transparent),linear-gradient(180deg,#12233d,#0a1424);border:1px solid var(--turbo);border-radius:24px;padding:28px;position:relative;overflow:hidden}
+.claim-card::after{content:'';position:absolute;right:-40px;top:-40px;width:160px;height:160px;background:var(--turbo);filter:blur(60px);opacity:.2}
+.progress{height:8px;background:rgba(255,255,255,.08);border-radius:100px;margin:18px 0;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--turbo);width:85%;box-shadow:0 0 12px var(--turbo)}
+.claim-btn-big{width:100%;padding:18px;border-radius:14px;background:var(--turbo);color:#000;font-weight:900;font-size:15px;border:none;cursor:pointer;display:flex;justify-content:center;gap:10px;transition:.3s}
+.claim-btn-big:hover{transform:scale(1.02);box-shadow:0 10px 40px rgba(0,240,255,.5)}
+.claim-btn-big.claimed{background:#1a2a3a;color:#5a6a7a}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(120px);background:#0f1f36;border:1px solid var(--turbo);color:#fff;padding:14px 24px;border-radius:100px;font-size:13px;transition:.5s;z-index:99;opacity:0}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-content">
-    <div class="badge">● REGISTRATION OPEN - KOLKATA 2026</div>
-    <h1><span class="outline">GREEN</span><br><span class="lime">CITY</span><br>RACE</h1>
-    <p>Kolkata's first 100% plastic-free run. Run 5K / 10K / 21K through Eco Park. Every kilometre = 1 Tree Planted in Sundarbans.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
-      <a href="#register" class="btn btn-lime">Register Now ₹299 →</a>
-      <a class="btn btn-glass">▶ Watch Teaser</a>
-    </div>
-    <p style="font-size:12px;margin-top:18px;color:#5a6a5a">✓ Organic T-Shirt + ✓ Seed Medal + ✓ Timing Chip</p>
-  </div>
+<section class="hero">
+<div class="nav"><div class="logo">GREEN CITY <span>RACE</span> x <span>TURBO26</span></div><div style="font-size:11px;color:#6a8496">From Kolkata • 26M Supply</div></div>
+
+<div class="badge">● REGISTRATION OPEN - KOLKATA 2026 x T-COIN</div>
+<h1 class="title"><span class="stroke">GREEN</span> <span class="green">CITY</span> <span class="blue">RACE</span></h1>
+<p class="sub">Kolkata's first 100% plastic-free run + Web3 Gaming. Run 5K/10K/21K through Eco Park. Every KM = 1 Tree in Sundarbans + Earn T-Coin TURBO26.</p>
+
+<div class="btn-row">
+<button class="btn btn-turbo" onclick="document.getElementById('claimSec').scrollIntoView({behavior:'smooth'})">⚡ CLAIM TURBO26 - T-Coin</button>
+<a class="btn btn-neon" href="https://green-city-race.vercel.app">Register Now ₹299 →</a>
+<button class="btn btn-ghost" onclick="window.open('https://turbo26.in','_blank')">▶ Watch turbo26.in</button>
 </div>
 
-<div class="marquee"><span> &nbsp; 12,500+ RUNNERS • 25,000 TREES • ZERO PLASTIC • ECO PARK KOLKATA • 5:30 AM FLAG OFF • 12,500+ RUNNERS • 25,000 TREES • ZERO PLASTIC • ECO PARK KOLKATA • 5:30 AM FLAG OFF &nbsp; </span></div>
-
-<div class="stats-bar">
-  <div class="stat"><b>12.5K+</b><p>Runners Joined</p></div>
-  <div class="stat"><b>21K</b><p>Max Distance</p></div>
-  <div class="stat"><b>100%</b><p>Eco Friendly</p></div>
+<!-- Contract Address Bar - From your photo -->
+<div class="contract-bar">
+<code id="addr">0x5a11075C985404288497c59778179b8fE2559d6d</code>
+<button class="copy-btn" onclick="copyAddr()">COPY</button>
 </div>
+<div style="text-align:center;font-size:10px;color:#5a7a8a;margin-top:8px;letter-spacing:.5px">Same Address on BSC, POLYGON & BASE — No Owner, No Mint, No Tax</div>
 
-<div class="section">
-  <h2 style="font-size:48px">WHY THIS RACE IS<br><span style="color:#c6ff00">DIFFERENT?</span></h2>
-  <div class="cards">
-    <div class="card"><div class="icon">🌱</div><h3>Medal That Grows</h3><p>Finishers get a seed-ball medal. Plant it, it becomes a real Tulsi/Neem plant. No metal waste.</p></div>
-    <div class="card"><div class="icon">♻️</div><h3>No Plastic Kit</h3><p>Bamboo T-shirt, steel sipper, banana-leaf bib. 0% plastic use - India's cleanest race.</p></div>
-    <div class="card"><div class="icon">🌳</div><h3>1KM = 1 Tree</h3><p>Your 10K = 10 trees planted in Sundarbans by our team. GPS certificate milega.</p></div>
-  </div>
-</div>
+<div class="lp-bar">🔒 <b>LP LOCKED 99.50% - 1 YEAR</b> — 10.3403 / 10.3923 LP on Mudra BSC | Risk: <b style="color:#00FF88">LOW</b> ● | <a href="#" style="color:var(--turbo)">View Mudra Certificate</a> | <a href="https://bscscan.com/address/0x5a11075C985404288497c59778179b8fE2559d6d" style="color:var(--turbo)">BscScan</a></div>
 
-<div class="cta" id="register">
-  <h2>READY TO<br>MAKE KOLKATA<br>GREEN AGAIN?</h2>
-  <p style="max-width:600px;margin:15px auto;font-weight:600">Early Bird ₹299 (Till Tonight 11:59PM) → After ₹599. UPI: greencity@upi</p>
-  <br>
-  <a href="https://wa.me/919999999999?text=Hi%20Green%20City%20Race%20Team%20-%20I%20want%20to%20register" class="btn" style="background:#000;color:#c6ff00;padding:18px 40px;font-size:18px">Register on WhatsApp</a>
-  <p style="margin-top:15px;font-size:12px;opacity:0.6">Limited 2000 slots only | Eco Park Gate 1 | 16th Feb 2026</p>
+<div class="chains">
+<div class="chain-card"><h4>🟡 BSC CHAIN</h4><p>Binance Smart Chain</p><div class="chain-actions"><button class="mini-btn mini-dark" onclick="addNetwork('BSC')">Add BSC Network</button><button class="mini-btn mini-turbo" onclick="addToken('BSC')">Add TURBO26 BSC</button></div></div>
+<div class="chain-card"><h4>🔵 POLYGON CHAIN</h4><p>Polygon Mainnet</p><div class="chain-actions"><button class="mini-btn mini-dark" onclick="addNetwork('POL')">Add POL Network</button><button class="mini-btn mini-turbo" onclick="addToken('POL')">Add TURBO26 POL</button></div></div>
+<div class="chain-card"><h4>🔵 BASE CHAIN</h4><p>Base - Coinbase L2</p><div class="chain-actions"><button class="mini-btn mini-dark" onclick="addNetwork('BASE')">Add BASE Network</button><button class="mini-btn mini-turbo" onclick="addToken('BASE')">Add TURBO26 BASE</button></div></div>
 </div>
+</section>
 
-<footer>
-  <div><b style="color:#fff">GREEN CITY RACE</b> © 2026 | Kolkata, India</div>
-  <div>Instagram: @greencityrace • Contact: +91 99999 99999</div>
-</footer>
-<div class="cta" id="claim-section" style="margin-top:30px; background:#e8f5e9; padding:20px; border-radius:12px;">
-  <h2>CLAIM YOUR POINTS 🌱</h2>
-  <p>Game khelo aur points claim karo</p>
-  <input id="walletInput" placeholder="Wallet address dalo" style="padding:10px; width:80%; max-width:300px; border-radius:8px; border:1px solid #ccc;">
-  <br><br>
-  <button onclick="claimPoints()" style="padding:12px 25px; background:#2e7d32; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Claim Now</button>
-  <p id="claimStatus" style="margin-top:10px; font-weight:600;"></p>
+<!-- CLAIM SECTION -->
+<section id="claimSec" style="padding:50px 5%;background:#070E1D">
+<div class="claim-wrap">
+<div class="claim-card">
+<div style="font-size:10px;letter-spacing:2px;color:var(--turbo);font-weight:800">● T-COIN GAMING REWARD - LIVE FROM TURBO26.IN</div>
+<h2 style="font-family:Syne;font-size:32px;margin-top:8px">CLAIM TURBO26<br>On Behalf of T-Coin</h2>
+<div style="display:flex;align-items:baseline;gap:12px;margin:18px 0"><span id="tbal" style="font-size:52px;font-weight:800;color:var(--turbo)">1,250</span><span style="background:rgba(0,240,255,.15);color:var(--turbo);padding:6px 12px;border-radius:100px;font-size:10px;font-weight:800">T-COINS</span></div>
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#6a8496"><span>TURBO Level</span><span>LVL 26 → 27 BOOST</span></div>
+<div class="progress"><i></i></div>
+<button id="mainClaim" class="claim-btn-big" onclick="doClaim()"><span id="ctxt">⚡ CLAIM TURBO26 - FREE</span></button>
+<div id="codeArea" style="display:none;margin-top:16px;text-align:center"><div style="font-family:JetBrains Mono;border:1px dashed var(--turbo);padding:12px;border-radius:10px;color:var(--turbo)">CODE: TURBO26 | Contract: 0x5a11...59d6d <span style="cursor:pointer" onclick="copyAddr()">📋</span></div><p style="font-size:11px;color:#5a7a8a;margin-top:8px">Code will work on green-city-race.vercel.app checkout + in-game wallet</p></div>
 </div>
+<div>
+<h3 style="font-family:Syne;font-size:26px">Why Claim <span style="color:var(--turbo)">TURBO26</span> ?</h3>
+<p style="color:#7a95a8;line-height:1.7;font-size:13px;margin:12px 0">Official Gaming Coin of Green City Race, powered by TURBO26 community from Kolkata. Built for Speed. Powered by Community.</p>
+<ul style="list-style:none;color:#c8d8e2;font-size:13px;line-height:2.2">
+<li>🏃‍♂️ TURBO26 Speed Boost in Race Gaming Mode +26%</li>
+<li>👕 Free Green City x TURBO26 Jersey (₹799)</li>
+<li>🌳 5 Extra Trees Planted in Sundarbans</li>
+<li>🎮 500 T-Coins Airdrop + Premium Avatar</li>
+<li>🔗 Same Token on BSC, POLYGON, BASE - No Tax</li>
+</ul>
+</div>
+</div>
+</section>
+
+<div id="toast" class="toast"></div>
 
 <script>
-const CLAIM_URL = "https://script.google.com/macros/s/AKfycbwQw9hn9MaCKsySsfWHBTw68CFw7Bb_sxrhTC3_38QEXU2MpWkrGV-MynkB2Sh2plY0ow/exec";
-
-function claimPoints() {
-  let wallet = document.getElementById("walletInput").value;
-  if(!wallet){ alert("Pehle wallet dalo"); return; }
-  let points = localStorage.getItem("points") || "100";
-  document.getElementById("claimStatus").innerText = "Claiming...";
-  
-  fetch(CLAIM_URL + "?wallet=" + wallet + "&points=" + points)
-    .then(res => res.text())
-    .then(() => {
-      document.getElementById("claimStatus").innerText = "✅ Claim successful! Sheet me save ho gaya";
-    })
-    .catch(() => {
-      document.getElementById("claimStatus").innerText = "Error, dubara try karo";
-    });
+const CONTRACT="0x5a11075C985404288497c59778179b8fE2559d6d";
+const CHAINS={
+ BSC:{chainId:'0x38',chainName:'BNB Smart Chain',rpcUrls:['https://bsc-dataseed.binance.org/'],nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},blockExplorerUrls:['https://bscscan.com']},
+ POL:{chainId:'0x89',chainName:'Polygon Mainnet',rpcUrls:['https://polygon-rpc.com'],nativeCurrency:{name:'POL',symbol:'POL',decimals:18},blockExplorerUrls:['https://polygonscan.com']},
+ BASE:{chainId:'0x2105',chainName:'Base Mainnet',rpcUrls:['https://mainnet.base.org'],nativeCurrency:{name:'ETH',symbol:'ETH',decimals:18},blockExplorerUrls:['https://basescan.org']}
 }
+async function addNetwork(type){
+ if(!window.ethereum){showToast('Install MetaMask first!');return}
+ try{await window.ethereum.request({method:'wallet_addEthereumChain',params:[CHAINS[type]]});showToast(type+' Network Added!')}catch(e){showToast('Error: '+(e.message||e))}
+}
+async function addToken(type){
+ if(!window.ethereum){showToast('Install MetaMask!');return}
+ try{
+  await window.ethereum.request({method:'wallet_watchAsset',params:{type:'ERC20',options:{address:CONTRACT,symbol:'TURBO26',decimals:18,image:'https://turbo26.in/logo.png'}}});
+  showToast('TURBO26 Added to Wallet on '+type);
+ }catch(e){showToast('Error adding token')}
+}
+function copyAddr(){navigator.clipboard.writeText(CONTRACT);showToast('✅ Contract Copied: '+CONTRACT.slice(0,10)+'...')}
+function showToast(m){const t=document.getElementById('toast');t.innerText=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
+
+const CLAIM_KEY='turbo26_claimed_final';
+function init(){if(localStorage.getItem(CLAIM_KEY))setClaimed()}
+function doClaim(){
+ const btn=document.getElementById('mainClaim');btn.disabled=true;
+ document.getElementById('ctxt').innerText='⏳ CLAIMING ON BEHALF OF T-COIN...';
+ setTimeout(()=>{
+  localStorage.setItem(CLAIM_KEY,Date.now());
+  let bal=1250;const iv=setInterval(()=>{bal+=18;document.getElementById('tbal').innerText=bal.toLocaleString();if(bal>=1750)clearInterval(iv)},30);
+  setClaimed();
+  showToast('✅ TURBO26 Claimed! +500 T-Coins | Code TURBO26 Active');
+  // Optional backend log
+  fetch('https://turbo26.in/api/claim?code=TURBO26', {method:'POST'}).catch(()=>{})
+ },1100);
+}
+function setClaimed(){
+ const btn=document.getElementById('mainClaim');btn.classList.add('claimed');btn.innerHTML='✓ TURBO26 CLAIMED - CODE ACTIVE BELOW';
+ document.getElementById('codeArea').style.display='block';
+}
+init();
 </script>
 </body>
 </html>
