@@ -156,3 +156,45 @@ init();
 </script>
 </body>
 </html>
+async function doClaim(){
+ const btn=document.getElementById('mainClaim');
+ const walletAddr = localStorage.getItem('connected_wallet');
+ 
+ if(!window.ethereum){
+   showToast('Install MetaMask first!');
+   return;
+ }
+ try{
+  btn.disabled=true;
+  document.getElementById('ctxt').innerText='🔗 CONNECTING WALLET...';
+  
+  // Connect wallet
+  const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
+  const wallet = accounts[0];
+  localStorage.setItem('connected_wallet', wallet);
+
+  document.getElementById('ctxt').innerText='⏳ CLAIMING 26 TURBO26 ON BSC...';
+  
+  // Call your Vercel backend
+  const res = await fetch('/api/claim', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({wallet, chain:'BSC'})
+  });
+  const data = await res.json();
+  
+  if(!res.ok) throw new Error(data.error);
+  
+  localStorage.setItem(CLAIM_KEY, Date.now());
+  let bal=1250;
+  const iv=setInterval(()=>{bal+=18;document.getElementById('tbal').innerText=bal.toLocaleString();if(bal>=1750)clearInterval(iv)},30);
+  setClaimed();
+  showToast(`✅ ${data.amount} TURBO26 Sent! TX: ${data.txHash.slice(0,10)}...`);
+  window.open(data.bscscan, '_blank');
+  
+ }catch(e){
+  showToast('Error: '+e.message);
+  btn.disabled=false;
+  document.getElementById('ctxt').innerText='⚡ CLAIM TURBO26 - FREE';
+ }
+}
