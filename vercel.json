@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/claim.js": {
+      "maxDuration": 10
+    }
+  }
+}
