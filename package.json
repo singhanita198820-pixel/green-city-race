@@ -1,0 +1,6 @@
+{
+  "name": "green-city-race-turbo26",
+  "dependencies": {
+    "ethers": "^6.8.1"
+  }
+}
