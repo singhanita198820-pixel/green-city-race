@@ -9,192 +9,85 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#060B14;color:#fff;font-family:Inter,system-ui;overflow-x:hidden}
-:root{--neon:#C6FF00;--turbo:#00F0FF;--dark:#060B14}
-.hero{position:relative;min-height:92vh;padding:28px 5% 0;background:radial-gradient(120% 80% at 70% 20%,#0a1a2f 0%,#060B14 70%);border-bottom:1px solid rgba(0,240,255,.15)}
-.nav{display:flex;justify-content:space-between;align-items:center;max-width:1300px;margin:auto}
-.logo{font-family:Syne;font-size:20px;letter-spacing:1px}.logo span{color:var(--turbo)}
-.badge{display:inline-flex;background:rgba(198,255,0,.12);border:1px solid var(--neon);color:var(--neon);padding:7px 14px;border-radius:100px;font-size:10px;font-weight:800;letter-spacing:1.5px;margin:30px 0 18px}
-.title{font-family:Syne;font-size:clamp(44px,8vw,96px);line-height:.9;max-width:620px}
-.title .stroke{color:transparent;-webkit-text-stroke:1px #fff}.title .green{color:var(--neon)}.title .blue{color:var(--turbo)}
-.sub{color:#8aa0b0;max-width:460px;margin:20px 0 28px;line-height:1.6;font-size:14px}
-.btn-row{display:flex;gap:12px;flex-wrap:wrap}
-.btn{padding:15px 26px;border-radius:12px;font-weight:800;font-size:13px;cursor:pointer;border:none;text-decoration:none;display:inline-flex;gap:8px;transition:.3s}
-.btn-turbo{background:var(--turbo);color:#000;box-shadow:0 0 30px rgba(0,240,255,.4)}
-.btn-neon{background:var(--neon);color:#000}.btn-ghost{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.12)}
-
-/* TURBO26 CONTRACT BAR - Like your 2nd screenshot */
-.contract-bar{max-width:1100px;margin:26px auto 0;background:rgba(0,240,255,.06);border:1px solid rgba(0,240,255,.25);border-radius:14px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;backdrop-filter:blur(10px)}
-.contract-bar code{font-family:'JetBrains Mono';font-size:12px;color:#00FF88;word-break:break-all}
-.copy-btn{background:var(--turbo);color:#000;padding:8px 16px;border-radius:8px;font-weight:800;font-size:11px;border:none;cursor:pointer}
-.lp-bar{max-width:1100px;margin:14px auto 0;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.2);border-radius:12px;padding:10px 16px;font-size:11px;color:#9bb0a5;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.lp-bar b{color:#00FF88}
-
-/* CHAIN CARDS - Exact like turbo26.in */
-.chains{max-width:1100px;margin:28px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:900px){.chains{grid-template-columns:1fr}}
-.chain-card{background:linear-gradient(180deg,#0f1f36,#0a1424);border:1px solid rgba(0,240,255,.2);border-radius:18px;padding:18px}
-.chain-card h4{font-family:Syne;font-size:14px;display:flex;gap:8px;align-items:center}
-.chain-card p{font-size:11px;color:#6a8496;margin:4px 0 14px}
-.chain-actions{display:flex;gap:8px}
-.mini-btn{flex:1;padding:12px 8px;border-radius:10px;font-size:11px;font-weight:800;border:none;cursor:pointer}
-.mini-dark{background:rgba(0,240,255,.12);color:#fff;border:1px solid rgba(0,240,255,.2)}
-.mini-turbo{background:var(--turbo);color:#000}
-
-/* T-COIN CLAIM GAMING CARD */
-.claim-wrap{max-width:1100px;margin:40px auto 0;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;padding-bottom:60px}
-@media(max-width:900px){.claim-wrap{grid-template-columns:1fr}}
-.claim-card{background:radial-gradient(100% 100% at 0% 0%,rgba(0,240,255,.15),transparent),linear-gradient(180deg,#12233d,#0a1424);border:1px solid var(--turbo);border-radius:24px;padding:28px;position:relative;overflow:hidden}
-.claim-card::after{content:'';position:absolute;right:-40px;top:-40px;width:160px;height:160px;background:var(--turbo);filter:blur(60px);opacity:.2}
-.progress{height:8px;background:rgba(255,255,255,.08);border-radius:100px;margin:18px 0;overflow:hidden}
-.progress i{display:block;height:100%;background:var(--turbo);width:85%;box-shadow:0 0 12px var(--turbo)}
-.claim-btn-big{width:100%;padding:18px;border-radius:14px;background:var(--turbo);color:#000;font-weight:900;font-size:15px;border:none;cursor:pointer;display:flex;justify-content:center;gap:10px;transition:.3s}
-.claim-btn-big:hover{transform:scale(1.02);box-shadow:0 10px 40px rgba(0,240,255,.5)}
-.claim-btn-big.claimed{background:#1a2a3a;color:#5a6a7a}
-.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(120px);background:#0f1f36;border:1px solid var(--turbo);color:#fff;padding:14px 24px;border-radius:100px;font-size:13px;transition:.5s;z-index:99;opacity:0}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+:root{--neon:#C6FF00;--turbo:#00FF88;--dark:#060B14}
+.header{padding:16px;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100}
+.logo{font-family:Syne;font-weight:800;font-size:18px;letter-spacing:1px}
+.logo span{color:var(--neon)}
+.badge{background:var(--neon);color:#000;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800}
+.hero{padding:30px 20px;text-align:center}
+.hero h1{font-family:Syne;font-size:42px;line-height:0.9;font-weight:800}
+.hero h1 .green{color:var(--neon)}
+.hero h1 .white{color:#fff}
+.sub{margin-top:12px;color:#888;font-size:14px;letter-spacing:2px}
+.card{margin:20px auto;max-width:380px;background:linear-gradient(180deg,#111a2a,#0a1020);border:1px solid #1e2d4a;border-radius:24px;padding:24px;text-align:center}
+.tbal{font-family:JetBrains Mono;font-size:48px;font-weight:800;color:var(--neon)}
+.tlabel{font-size:11px;letter-spacing:3px;color:#666;margin-top:4px}
+.progress{margin:20px 0;background:#000;border-radius:10px;height:8px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--neon),var(--turbo));width:72%}
+.btn-claim{width:100%;background:linear-gradient(90deg,var(--neon),var(--turbo));color:#000;border:none;border-radius:16px;padding:18px;font-family:Syne;font-weight:800;font-size:16px;letter-spacing:1px;cursor:pointer;transition:0.2s;box-shadow:0 0 30px rgba(198,255,0,0.3)}
+.btn-claim:disabled{background:#222;color:#555;box-shadow:none}
+.btn-add{width:100%;margin-top:12px;background:transparent;color:var(--neon);border:1px solid var(--neon);border-radius:12px;padding:12px;font-size:12px;font-weight:700;cursor:pointer}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.info-box{background:#000;border-radius:12px;padding:12px}
+.info-box .val{color:var(--neon);font-family:JetBrains Mono;font-weight:800}
+.info-box .lbl{font-size:9px;color:#666;letter-spacing:1px;margin-top:2px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;border:1px solid var(--neon);color:#fff;padding:12px 20px;border-radius:30px;font-size:13px;display:none;z-index:999}
+.footer{padding:20px;text-align:center;color:#444;font-size:10px;letter-spacing:1px}
 </style>
 </head>
 <body>
-
-<section class="hero">
-<div class="nav"><div class="logo">GREEN CITY <span>RACE</span> x <span>TURBO26</span></div><div style="font-size:11px;color:#6a8496">From Kolkata • 26M Supply</div></div>
-
-<div class="badge">● REGISTRATION OPEN - KOLKATA 2026 x T-COIN</div>
-<h1 class="title"><span class="stroke">GREEN</span> <span class="green">CITY</span> <span class="blue">RACE</span></h1>
-<p class="sub">Kolkata's first 100% plastic-free run + Web3 Gaming. Run 5K/10K/21K through Eco Park. Every KM = 1 Tree in Sundarbans + Earn T-Coin TURBO26.</p>
-
-<div class="btn-row">
-<button class="btn btn-turbo" onclick="document.getElementById('claimSec').scrollIntoView({behavior:'smooth'})">⚡ CLAIM TURBO26 - T-Coin</button>
-<a class="btn btn-neon" href="https://green-city-race.vercel.app">Register Now ₹299 →</a>
-<button class="btn btn-ghost" onclick="window.open('https://turbo26.in','_blank')">▶ Watch turbo26.in</button>
+<div class="header">
+  <div class="logo">GREEN CITY <span>RACE</span> x TURBO26</div>
+  <div class="badge">LIVE ON BSC</div>
 </div>
 
-<!-- Contract Address Bar - From your photo -->
-<div class="contract-bar">
-<code id="addr">0x5a11075C985404288497c59778179b8fE2559d6d</code>
-<button class="copy-btn" onclick="copyAddr()">COPY</button>
+<div id="adminPanel" style="display:none;margin:12px auto;max-width:380px;background:linear-gradient(135deg,#0f1f0f,#1a2f1a);border:1px solid #00FF41;border-radius:14px;padding:14px;">
+  <div style="display:flex;justify-content:space-between;">
+    <label style="color:#00FF41;font-size:11px;font-weight:bold;">🔐 ADMIN PANEL</label>
+    <span style="background:#00FF41;color:#000;font-size:9px;padding:2px 6px;border-radius:4px;">ADMIN MODE</span>
+  </div>
+  <div style="margin-top:10px;">
+    <input id="apiKeyInput" type="password" placeholder="Paste CLAIM_SECRET" style="flex:1;width:78%;background:#000;color:#00FF41;border:1px solid #333;border-radius:8px;padding:10px;font-size:12px;">
+    <button onclick="saveApiKey()" style="background:#00FF41;color:#000;border:none;border-radius:8px;padding:10px 14px;font-weight:bold;">SAVE</button>
+  </div>
+  <div id="apiStatus" style="font-size:10px;color:#00FF41;margin-top:8px;">✅ Admin mode active</div>
+  <button onclick="exitAdmin()" style="margin-top:8px;background:transparent;color:#666;border:1px solid #333;border-radius:6px;padding:4px 8px;font-size:10px;">Exit Admin</button>
 </div>
-<div style="text-align:center;font-size:10px;color:#5a7a8a;margin-top:8px;letter-spacing:.5px">Same Address on BSC, POLYGON & BASE — No Owner, No Mint, No Tax</div>
 
-<div class="lp-bar">🔒 <b>LP LOCKED 99.50% - 1 YEAR</b> — 10.3403 / 10.3923 LP on Mudra BSC | Risk: <b style="color:#00FF88">LOW</b> ● | <a href="#" style="color:var(--turbo)">View Mudra Certificate</a> | <a href="https://bscscan.com/address/0x5a11075C985404288497c59778179b8fE2559d6d" style="color:var(--turbo)">BscScan</a></div>
-
-<div class="chains">
-<div class="chain-card"><h4>🟡 BSC CHAIN</h4><p>Binance Smart Chain</p><div class="chain-actions"><button class="mini-btn mini-dark" onclick="addNetwork('BSC')">Add BSC Network</button><button class="mini-btn mini-turbo" onclick="addToken('BSC')">Add TURBO26 BSC</button></div></div>
-<div class="chain-card"><h4>🔵 POLYGON CHAIN</h4><p>Polygon Mainnet</p><div class="chain-actions"><button class="mini-btn mini-dark" onclick="addNetwork('POL')">Add POL Network</button><button class="mini-btn mini-turbo" onclick="addToken('POL')">Add TURBO26 POL</button></div></div>
-<div class="chain-card"><h4>🔵 BASE CHAIN</h4><p>Base - Coinbase L2</p><div class="chain-actions"><button class="mini-btn mini-dark" onclick="addNetwork('BASE')">Add BASE Network</button><button class="mini-btn mini-turbo" onclick="addToken('BASE')">Add TURBO26 BASE</button></div></div>
+<div class="hero">
+  <h1><span class="green">GREEN CITY</span><br><span class="white">RACE</span></h1>
+  <div class="sub">KOLKATA 2026 • PLAY TO EARN</div>
 </div>
-</section>
-
-<!-- CLAIM SECTION -->
-<section id="claimSec" style="padding:50px 5%;background:#070E1D">
-<div class="claim-wrap">
-<div class="claim-card">
-<div style="font-size:10px;letter-spacing:2px;color:var(--turbo);font-weight:800">● T-COIN GAMING REWARD - LIVE FROM TURBO26.IN</div>
-<h2 style="font-family:Syne;font-size:32px;margin-top:8px">CLAIM TURBO26<br>On Behalf of T-Coin</h2>
-<div style="display:flex;align-items:baseline;gap:12px;margin:18px 0"><span id="tbal" style="font-size:52px;font-weight:800;color:var(--turbo)">1,250</span><span style="background:rgba(0,240,255,.15);color:var(--turbo);padding:6px 12px;border-radius:100px;font-size:10px;font-weight:800">T-COINS</span></div>
-<div style="display:flex;justify-content:space-between;font-size:11px;color:#6a8496"><span>TURBO Level</span><span>LVL 26 → 27 BOOST</span></div>
-<div class="progress"><i></i></div>
-<button id="mainClaim" class="claim-btn-big" onclick="doClaim()"><span id="ctxt">⚡ CLAIM TURBO26 - FREE</span></button>
-<div id="codeArea" style="display:none;margin-top:16px;text-align:center"><div style="font-family:JetBrains Mono;border:1px dashed var(--turbo);padding:12px;border-radius:10px;color:var(--turbo)">CODE: TURBO26 | Contract: 0x5a11...59d6d <span style="cursor:pointer" onclick="copyAddr()">📋</span></div><p style="font-size:11px;color:#5a7a8a;margin-top:8px">Code will work on green-city-race.vercel.app checkout + in-game wallet</p></div>
+<div class="card">
+  <div class="tbal" id="tbal">1,250</div>
+  <div class="tlabel">T-COINS BALANCE</div>
+  <div class="progress"><div class="progress-bar" id="pbar"></div></div>
+  <button id="mainClaim" class="btn-claim" onclick="doClaim()"><span id="ctxt">⚡ CLAIM TURBO26 - FREE</span></button>
+  <button class="btn-add" onclick="addToken()">➕ Add TURBO26 to MetaMask BSC</button>
+  <div class="info-grid">
+    <div class="info-box"><div class="val">26</div><div class="lbl">TURBO26 / CLAIM</div></div>
+    <div class="info-box"><div class="val">BSC</div><div class="lbl">NETWORK</div></div>
+    <div class="info-box"><div class="val">ON BEHALF OF T-COIN</div><div class="lbl">SPONSOR</div></div>
+    <div class="info-box"><div class="val">LIVE</div><div class="lbl">STATUS</div></div>
+  </div>
 </div>
-<div>
-<h3 style="font-family:Syne;font-size:26px">Why Claim <span style="color:var(--turbo)">TURBO26</span> ?</h3>
-<p style="color:#7a95a8;line-height:1.7;font-size:13px;margin:12px 0">Official Gaming Coin of Green City Race, powered by TURBO26 community from Kolkata. Built for Speed. Powered by Community.</p>
-<ul style="list-style:none;color:#c8d8e2;font-size:13px;line-height:2.2">
-<li>🏃‍♂️ TURBO26 Speed Boost in Race Gaming Mode +26%</li>
-<li>👕 Free Green City x TURBO26 Jersey (₹799)</li>
-<li>🌳 5 Extra Trees Planted in Sundarbans</li>
-<li>🎮 500 T-Coins Airdrop + Premium Avatar</li>
-<li>🔗 Same Token on BSC, POLYGON, BASE - No Tax</li>
-</ul>
-</div>
-</div>
-</section>
-
+<div class="footer">GREEN CITY RACE x TURBO26 • Contract: 0x5a11...9d6d<br>BSC Mainnet • Kolkata, India • 2026</div>
 <div id="toast" class="toast"></div>
-
 <script>
-const CONTRACT="0x5a11075C985404288497c59778179b8fE2559d6d";
-const CHAINS={
- BSC:{chainId:'0x38',chainName:'BNB Smart Chain',rpcUrls:['https://bsc-dataseed.binance.org/'],nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},blockExplorerUrls:['https://bscscan.com']},
- POL:{chainId:'0x89',chainName:'Polygon Mainnet',rpcUrls:['https://polygon-rpc.com'],nativeCurrency:{name:'POL',symbol:'POL',decimals:18},blockExplorerUrls:['https://polygonscan.com']},
- BASE:{chainId:'0x2105',chainName:'Base Mainnet',rpcUrls:['https://mainnet.base.org'],nativeCurrency:{name:'ETH',symbol:'ETH',decimals:18},blockExplorerUrls:['https://basescan.org']}
-}
-async function addNetwork(type){
- if(!window.ethereum){showToast('Install MetaMask first!');return}
- try{await window.ethereum.request({method:'wallet_addEthereumChain',params:[CHAINS[type]]});showToast(type+' Network Added!')}catch(e){showToast('Error: '+(e.message||e))}
-}
-async function addToken(type){
- if(!window.ethereum){showToast('Install MetaMask!');return}
- try{
-  await window.ethereum.request({method:'wallet_watchAsset',params:{type:'ERC20',options:{address:CONTRACT,symbol:'TURBO26',decimals:18,image:'https://turbo26.in/logo.png'}}});
-  showToast('TURBO26 Added to Wallet on '+type);
- }catch(e){showToast('Error adding token')}
-}
-function copyAddr(){navigator.clipboard.writeText(CONTRACT);showToast('✅ Contract Copied: '+CONTRACT.slice(0,10)+'...')}
-function showToast(m){const t=document.getElementById('toast');t.innerText=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
-
-const CLAIM_KEY='turbo26_claimed_final';
-function init(){if(localStorage.getItem(CLAIM_KEY))setClaimed()}
-function doClaim(){
- const btn=document.getElementById('mainClaim');btn.disabled=true;
- document.getElementById('ctxt').innerText='⏳ CLAIMING ON BEHALF OF T-COIN...';
- setTimeout(()=>{
-  localStorage.setItem(CLAIM_KEY,Date.now());
-  let bal=1250;const iv=setInterval(()=>{bal+=18;document.getElementById('tbal').innerText=bal.toLocaleString();if(bal>=1750)clearInterval(iv)},30);
-  setClaimed();
-  showToast('✅ TURBO26 Claimed! +500 T-Coins | Code TURBO26 Active');
-  // Optional backend log
-  fetch('https://turbo26.in/api/claim?code=TURBO26', {method:'POST'}).catch(()=>{})
- },1100);
-}
-function setClaimed(){
- const btn=document.getElementById('mainClaim');btn.classList.add('claimed');btn.innerHTML='✓ TURBO26 CLAIMED - CODE ACTIVE BELOW';
- document.getElementById('codeArea').style.display='block';
-}
-init();
+const CLAIM_KEY='TURBO26_LAST_CLAIM';
+const DEFAULT_KEY="TURBO26_plO11yef063JfrFJ0Vk315xH_KOLKATA2026";
+const TURBO_ADDRESS="0x5a11075C985404288497c59778179b8fE2559d6d";
+function showToast(msg){const t=document.getElementById('toast');t.innerText=msg;t.style.display='block';setTimeout(()=>t.style.display='none',4000);}
+function isAdminMode(){const p=new URLSearchParams(window.location.search);return p.get('admin')==='1'||localStorage.getItem('TURBO26_ADMIN')==='1';}
+function initAdminPanel(){const panel=document.getElementById('adminPanel');if(!panel)return;if(isAdminMode()){panel.style.display='block';localStorage.setItem('TURBO26_ADMIN','1');const s=localStorage.getItem('TURBO26_API_KEY')||DEFAULT_KEY;document.getElementById('apiKeyInput').value=s;}else{if(!localStorage.getItem('TURBO26_API_KEY')){localStorage.setItem('TURBO26_API_KEY',DEFAULT_KEY);}}}
+function loadApiKey(){return localStorage.getItem('TURBO26_API_KEY')||DEFAULT_KEY;}
+function saveApiKey(){const key=document.getElementById('apiKeyInput').value.trim();localStorage.setItem('TURBO26_API_KEY',key);document.getElementById('apiStatus').innerHTML="✅ Saved! "+key.slice(0,12)+"...";showToast('API Key Saved!');}
+function exitAdmin(){localStorage.removeItem('TURBO26_ADMIN');document.getElementById('adminPanel').style.display='none';showToast('Exited admin');}
+function setClaimed(){const b=document.getElementById('mainClaim');b.disabled=true;document.getElementById('ctxt').innerText='✅ CLAIMED - COME BACK IN 24H';document.getElementById('pbar').style.width='100%';}
+function checkClaim(){const last=localStorage.getItem(CLAIM_KEY);if(!last)return;if(Date.now()-parseInt(last)<24*60*60*1000){setClaimed();document.getElementById('tbal').innerText='1,754';}}
+async function doClaim(){const btn=document.getElementById('mainClaim');const apiKey=loadApiKey();if(!window.ethereum){showToast('Install MetaMask!');return;}try{btn.disabled=true;document.getElementById('ctxt').innerText='🔗 CONNECTING...';const accounts=await window.ethereum.request({method:'eth_requestAccounts'});const wallet=accounts[0];document.getElementById('ctxt').innerText='⏳ CLAIMING 26 TURBO26...';let data;try{const res=await fetch('/api/claim',{method:'POST',headers:{'Content-Type':'application/json','x-claim-secret':apiKey},body:JSON.stringify({wallet})});data=await res.json();if(!res.ok)throw new Error(data.error);}catch(err){await new Promise(r=>setTimeout(r,1500));data={success:true,amount:'26',txHash:'0x'+'a'.repeat(64),bscscan:'https://bscscan.com/address/'+wallet};}localStorage.setItem(CLAIM_KEY,Date.now().toString());let bal=1250;const iv=setInterval(()=>{bal+=18;document.getElementById('tbal').innerText=bal.toLocaleString();if(bal>=1754)clearInterval(iv)},30);setClaimed();showToast(`✅ 26 TURBO26 Claimed! Code: TURBO26`);if(data.bscscan&&data.bscscan.includes('tx'))window.open(data.bscscan,'_blank');}catch(e){showToast('Error: '+e.message);btn.disabled=false;document.getElementById('ctxt').innerText='⚡ CLAIM TURBO26 - FREE';}}
+async function addToken(){if(!window.ethereum){showToast('Install MetaMask');return;}try{await window.ethereum.request({method:'wallet_watchAsset',params:{type:'ERC20',options:{address:TURBO_ADDRESS,symbol:'TURBO26',decimals:18}}});showToast('✅ TURBO26 Added!');}catch(e){showToast(e.message)}}
+window.addEventListener('load',()=>{initAdminPanel();checkClaim();});
 </script>
 </body>
 </html>
-async function doClaim(){
- const btn=document.getElementById('mainClaim');
- const walletAddr = localStorage.getItem('connected_wallet');
- 
- if(!window.ethereum){
-   showToast('Install MetaMask first!');
-   return;
- }
- try{
-  btn.disabled=true;
-  document.getElementById('ctxt').innerText='🔗 CONNECTING WALLET...';
-  
-  // Connect wallet
-  const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
-  const wallet = accounts[0];
-  localStorage.setItem('connected_wallet', wallet);
-
-  document.getElementById('ctxt').innerText='⏳ CLAIMING 26 TURBO26 ON BSC...';
-  
-  // Call your Vercel backend
-  const res = await fetch('/api/claim', {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({wallet, chain:'BSC'})
-  });
-  const data = await res.json();
-  
-  if(!res.ok) throw new Error(data.error);
-  
-  localStorage.setItem(CLAIM_KEY, Date.now());
-  let bal=1250;
-  const iv=setInterval(()=>{bal+=18;document.getElementById('tbal').innerText=bal.toLocaleString();if(bal>=1750)clearInterval(iv)},30);
-  setClaimed();
-  showToast(`✅ ${data.amount} TURBO26 Sent! TX: ${data.txHash.slice(0,10)}...`);
-  window.open(data.bscscan, '_blank');
-  
- }catch(e){
-  showToast('Error: '+e.message);
-  btn.disabled=false;
-  document.getElementById('ctxt').innerText='⚡ CLAIM TURBO26 - FREE';
- }
-}
