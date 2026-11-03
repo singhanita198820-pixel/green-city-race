@@ -1,66 +1,27 @@
-// api/claim.js - Real TURBO26 Airdrop Backend on BSC
-import { ethers } from "ethers";
+<!-- ADMIN ONLY API KEY - Hidden for normal users -->
+<div id="adminPanel" style="display:none;margin:12px auto;max-width:340px;background:linear-gradient(135deg,#0f1f0f,#1a2f1a);border:1px solid #00FF41;border-radius:14px;padding:14px;box-shadow:0 0 20px rgba(0,255,65,0.2);">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <label style="color:#00FF41;font-size:11px;letter-spacing:1px;font-weight:bold;">🔐 ADMIN PANEL - TURBO26</label>
+    <span style="background:#00FF41;color:#000;font-size:9px;padding:2px 6px;border-radius:4px;font-weight:bold;">ADMIN MODE</span>
+  </div>
+  
+  <div style="margin-top:10px;">
+    <label style="color:#aaa;font-size:10px;">API KEY (CLAIM_SECRET)</label>
+    <div style="display:flex;gap:8px;margin-top:4px;">
+      <input id="apiKeyInput" type="password" placeholder="Paste CLAIM_SECRET" 
+        style="flex:1;background:#000;color:#00FF41;border:1px solid #333;border-radius:8px;padding:10px;font-size:12px;outline:none;"
+      >
+      <button onclick="toggleKey()" style="background:#333;color:#fff;border:none;border-radius:8px;padding:10px;cursor:pointer;">👁️</button>
+      <button onclick="saveApiKey()" style="background:#00FF41;color:#000;border:none;border-radius:8px;padding:10px 14px;font-weight:bold;cursor:pointer;">SAVE</button>
+    </div>
+  </div>
 
-const CONTRACT = "0x5a11075C985404288497c59778179b8fE2559d6d";
-const ABI = [
-  "function transfer(address to, uint amount) returns (bool)",
-  "function balanceOf(address) view returns (uint)",
-  "function decimals() view returns (uint8)"
-];
+  <div style="margin-top:10px;">
+    <label style="color:#aaa;font-size:10px;">AIRDROP WALLET STATUS</label>
+    <div id="adminStats" style="background:#000;border-radius:8px;padding:8px;margin-top:4px;font-size:11px;color:#888;">
+      Checking...
+    </div>
+  </div>
 
-// Simple in-memory rate limit - use Upstash Redis for production
-const claimed = new Map();
-
-export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  if (req.method === "OPTIONS") return res.status(200).end();
-  if (req.method !== "POST") return res.status(405).json({error:"Use POST"});
-
-  try {
-    const { wallet, chain } = req.body;
-    
-    if (!wallet || !ethers.isAddress(wallet)) {
-      return res.status(400).json({error:"Invalid wallet address"});
-    }
-
-    // Anti-spam: 1 claim per wallet per 24h
-    if (claimed.has(wallet.toLowerCase())) {
-      const last = claimed.get(wallet.toLowerCase());
-      if (Date.now() - last < 24*60*60*1000) {
-        return res.status(429).json({error:"Already claimed in last 24h", code:"TURBO26"});
-      }
-    }
-
-    // Setup signer - PUT YOUR PRIVATE KEY IN VERCEL ENV!
-    const provider = new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org/");
-    const signer = new ethers.Wallet(process.env.AIRDROP_PRIVATE_KEY, provider);
-    const token = new ethers.Contract(CONTRACT, ABI, signer);
-    
-    const decimals = await token.decimals();
-    const amount = ethers.parseUnits("26", decimals); // 26 TURBO26 per claim
-
-    // Check balance
-    const bal = await token.balanceOf(signer.address);
-    if (bal < amount) {
-      return res.status(500).json({error:"Airdrop wallet empty, top up TURBO26"});
-    }
-
-    // Send token
-    const tx = await token.transfer(wallet, amount);
-    claimed.set(wallet.toLowerCase(), Date.now());
-
-    return res.status(200).json({
-      success:true,
-      code:"TURBO26",
-      txHash: tx.hash,
-      amount:"26",
-      bscscan:`https://bscscan.com/tx/${tx.hash}`,
-      message:"26 TURBO26 sent on BSC!"
-    });
-
-  } catch (e) {
-    console.error(e);
-    return res.status(500).json({error:e.message});
-  }
-}
+  <div id="apiStatus" style="font-size:10px;color:#00FF41;margin-top:8px;">✅ Admin mode active</div>
+</div>
